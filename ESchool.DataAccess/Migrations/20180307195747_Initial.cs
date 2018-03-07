@@ -17,15 +17,11 @@ namespace ESchool.DataAccess.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatersDate = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Loggin = table.Column<string>(nullable: true),
                     ModifierDate = table.Column<DateTime>(nullable: true),
                     ModifierId = table.Column<int>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    ClassId = table.Column<int>(nullable: true),
-                    TeacherDbModel_ClassId = table.Column<int>(nullable: true),
-                    TeacherStatus = table.Column<int>(nullable: true)
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,11 +68,13 @@ namespace ESchool.DataAccess.Migrations
                 {
                     AccauntId = table.Column<int>(nullable: false),
                     Age = table.Column<int>(nullable: true),
+                    ClassId = table.Column<int>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Patronymic = table.Column<string>(nullable: true),
-                    SchoolId = table.Column<int>(nullable: false)
+                    SchoolId = table.Column<int>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
