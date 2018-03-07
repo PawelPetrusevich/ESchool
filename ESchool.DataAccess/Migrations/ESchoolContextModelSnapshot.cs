@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
 namespace ESchool.DataAccess.Migrations
@@ -94,9 +93,6 @@ namespace ESchool.DataAccess.Migrations
 
                     b.Property<int>("CreatorId");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email");
 
                     b.Property<string>("Loggin");
@@ -110,8 +106,6 @@ namespace ESchool.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AccauntDbModels");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AccauntDbModel");
                 });
 
             modelBuilder.Entity("ESchool.Common.Model.Users.AccauntSettingsDbModel", b =>
@@ -119,6 +113,8 @@ namespace ESchool.DataAccess.Migrations
                     b.Property<int>("AccauntId");
 
                     b.Property<int?>("Age");
+
+                    b.Property<int?>("ClassId");
 
                     b.Property<DateTime?>("DateOfBirth");
 
@@ -128,36 +124,13 @@ namespace ESchool.DataAccess.Migrations
 
                     b.Property<string>("Patronymic");
 
-                    b.Property<int>("SchoolId");
+                    b.Property<int?>("SchoolId");
+
+                    b.Property<int>("Status");
 
                     b.HasKey("AccauntId");
 
                     b.ToTable("AccauntSettingsDbModels");
-                });
-
-            modelBuilder.Entity("ESchool.Common.Model.Users.LearnerDbModel", b =>
-                {
-                    b.HasBaseType("ESchool.Common.Model.Users.AccauntDbModel");
-
-                    b.Property<int>("ClassId");
-
-                    b.ToTable("LearnerDbModel");
-
-                    b.HasDiscriminator().HasValue("LearnerDbModel");
-                });
-
-            modelBuilder.Entity("ESchool.Common.Model.Users.TeacherDbModel", b =>
-                {
-                    b.HasBaseType("ESchool.Common.Model.Users.AccauntDbModel");
-
-                    b.Property<int>("ClassId")
-                        .HasColumnName("TeacherDbModel_ClassId");
-
-                    b.Property<int>("TeacherStatus");
-
-                    b.ToTable("TeacherDbModel");
-
-                    b.HasDiscriminator().HasValue("TeacherDbModel");
                 });
 
             modelBuilder.Entity("ESchool.Common.Model.Institution.InstitutionDbModel", b =>

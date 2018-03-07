@@ -14,8 +14,7 @@ namespace ESchool.DataAccess.Context
 
         public DbSet<AccauntDbModel> AccauntDbModels { get; set; }
         public DbSet<AccauntSettingsDbModel> AccauntSettingsDbModels { get; set; }
-        public DbSet<LearnerDbModel> LearnerDbModels { get; set; }
-        public DbSet<TeacherDbModel> TeacherDbModels { get; set; }
+
         public DbSet<SubjectOfInstructionsDbModel> SubjectOfInstructionsDbModels { get; set; }
         public DbSet<InstitutionDbModel> InstutionDbModels { get; set; }
 
@@ -26,9 +25,7 @@ namespace ESchool.DataAccess.Context
             modelBuilder.ApplyConfiguration(new AccauntSettingsDbModelConfiguration());
             modelBuilder.ApplyConfiguration(new CityDbModelConfiguration());
             modelBuilder.ApplyConfiguration(new InstitutionDbModelConfiguration());
-            modelBuilder.ApplyConfiguration(new LearnerDbModelConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectOfInstructionConfiguration());
-            modelBuilder.ApplyConfiguration(new TeacherDbModelConfiguration());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ESchool.Common.Enums;
 
 namespace ESchool.Common.Model.Users
 {
@@ -18,7 +19,12 @@ namespace ESchool.Common.Model.Users
 
         public DateTime? DateOfBirth { get; set; }
 
-        public int SchoolId { get; set; }
+        public int? SchoolId { get; set; }
+
+        public int? ClassId { get; set; }
+
+        public Status Status { get; set; }
+        
 
         public AccauntDbModel Accaunt { get; set; }
     }
