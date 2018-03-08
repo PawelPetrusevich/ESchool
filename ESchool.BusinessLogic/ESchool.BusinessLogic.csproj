@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Service\" />
+    <PackageReference Include="StyleCopPlus.MSBuild" Version="4.7.49.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCopPlus.MSBuild" Version="4.7.49.5" />
+    <ProjectReference Include="..\ESchool.Common\ESchool.Common.csproj" />
   </ItemGroup>
 
 </Project>

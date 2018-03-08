@@ -1,4 +1,6 @@
-﻿using ESchool.DataAccess.Context;
+﻿using AutoMapper;
+using ESchool.Common;
+using ESchool.DataAccess.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +22,14 @@ namespace ESchool
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var conectionString = Configuration.GetConnectionString("ESchoolConnection");
-            services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(conectionString));
+
+            services.AddAutoMapper();
+            services.DIContainer();
+            services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ESchoolConnection")));
             services.AddMvc();
         }
 
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -32,6 +37,7 @@ namespace ESchool
             {
                 app.UseDeveloperExceptionPage();
             }
+            
 
             app.UseMvc();
         }
