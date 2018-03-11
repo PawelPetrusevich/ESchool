@@ -9,8 +9,7 @@ namespace ESchool.Common
     {
         public MapperProfiler()
         {
-            this.CreateMap<AccauntDbModel, UserDTO>()
-                .ForMember(x => x.CreatersDate, obj => obj.UseValue(DateTime.Now));
+            this.CreateMap<AccauntDbModel, UserDTO>().ReverseMap();
         }
     }
 }

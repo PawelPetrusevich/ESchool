@@ -15,6 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.15.4" />
     <PackageReference Include="StyleCopPlus.MSBuild" Version="4.7.49.5" />
   </ItemGroup>
 

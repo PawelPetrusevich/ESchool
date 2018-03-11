@@ -11,9 +11,11 @@ namespace ESchool.BusinessLogic.Service
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
+            this._mapper = mapper;
             this._userRepository = userRepository;
         }
         public async Task<UserDTO> CreateUser(UserDTO userDto)
@@ -23,10 +25,10 @@ namespace ESchool.BusinessLogic.Service
                 throw new ArgumentNullException();
             }
 
-            var user = Mapper.Map<AccauntDbModel>(userDto);
+            var user = _mapper.Map<AccauntDbModel>(userDto);
             var result = await _userRepository.AddAsync(user);
 
-            return result is null ? throw new InvalidOperationException() : Mapper.Map<UserDTO>(result);
+            return result is null ? throw new InvalidOperationException() : _mapper.Map<UserDTO>(result);
 
         }
     }
