@@ -38,7 +38,7 @@ namespace ESchool
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v2", new Info {Title = "My API", Version = "v2"});
+                c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"});
             });
 
         }
@@ -59,7 +59,7 @@ namespace ESchool
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API V2");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
             app.UseMvc(routes =>
