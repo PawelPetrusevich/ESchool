@@ -18,6 +18,8 @@ namespace ESchool.Controllers
         {
             this._userService = userService;
         }
+        
+        [Route("createUser")]
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserDTO user)
         {
