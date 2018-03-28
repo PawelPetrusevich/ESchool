@@ -9,7 +9,7 @@ namespace ESchool.Common
     {
         public MapperProfiler()
         {
-            this.CreateMap<AccauntDbModel, UserDTO>().ReverseMap();
+            this.CreateMap<AccauntDbModel, CreatedUserDto>().ReverseMap();
         }
     }
 }

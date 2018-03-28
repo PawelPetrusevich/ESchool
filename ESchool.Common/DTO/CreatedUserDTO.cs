@@ -2,7 +2,7 @@
 
 namespace ESchool.Common.DTO
 {
-    public class UserDTO
+    public class CreatedUserDto
     {
         public string Loggin { get; set; }
 

@@ -9,28 +9,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ESchool.Controllers
 {
+    using Serilog;
+
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IUserService userService;
 
         public UserController(IUserService userService)
         {
-            this._userService = userService;
+            this.userService = userService;
         }
         
         [Route("createUser")]
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserDTO user)
+        public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
         {
-            if (user == null)
+            if (!ModelState.IsValid)
             {
                 return BadRequest("User is Invalid");
             }
 
             try
             {
-                return Ok(await _userService.CreateUser(user));
+                Log.Information($"Attempt to creat new user");
+                return Ok(await this.userService.CreateUser(user));
             }
             catch (Exception e)
             {

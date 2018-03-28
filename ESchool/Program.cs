@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 namespace ESchool
 {
     using System;
+    using System.IO;
 
     using ESchool.Properties;
 
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyModel;
 
     using Serilog;
@@ -16,13 +18,6 @@ namespace ESchool
     {
         public static int Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.ColoredConsole()
-                .CreateLogger();
-
             try
             {
                 Log.Information(Resources.SuccessfulHostRun);
@@ -44,6 +39,34 @@ namespace ESchool
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseSerilog()
+                .ConfigureAppConfiguration(
+                    (hostingcontext, config) =>
+                        {
+                            var currentEnv = hostingcontext.HostingEnvironment;
+                            config.AddJsonFile("appsettings.json");
+                            config.AddJsonFile($"appsettings.{currentEnv.EnvironmentName}.json", optional: true);
+                            config.AddEnvironmentVariables();
+
+                            if (currentEnv.IsDevelopment())
+                            {
+                                Log.Logger = new LoggerConfiguration()
+                                    .MinimumLevel.Debug()
+                                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                                    .Enrich.FromLogContext()
+                                    .WriteTo.ColoredConsole()
+                                    .CreateLogger();
+                            }
+                            else
+                            {
+                                // Logging file not created
+                                Log.Logger = new LoggerConfiguration()
+                                    .MinimumLevel.Debug()
+                                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                                    .Enrich.FromLogContext()
+                                    .WriteTo.RollingFile(Path.Combine(hostingcontext.HostingEnvironment.ContentRootPath, "\\logs\\{Date}-log.txt"))
+                                    .CreateLogger();
+                            }
+                        })
                 .Build();
     }
 }

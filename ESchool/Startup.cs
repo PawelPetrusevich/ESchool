@@ -3,16 +3,23 @@
     using AutoMapper;
 
     using ESchool.BusinessLogic.Service;
+    using ESchool.Common.DTO;
     using ESchool.Common.Interface.Repository;
     using ESchool.Common.Interface.Service;
+    using ESchool.Common.ModelVolidators;
     using ESchool.DataAccess.Context;
     using ESchool.DataAccess.Repositories;
+
+    using FluentValidation;
+    using FluentValidation.AspNetCore;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+
+    using Serilog;
 
     using Swashbuckle.AspNetCore.Swagger;
 
@@ -28,7 +35,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddLogging(logginBuilder => logginBuilder.AddSerilog(dispose: true));
             services.AddAutoMapper();
             services.AddScoped<DbContext, ESchoolContext>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -38,8 +45,10 @@
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
-            services.AddMvc();
+            services.AddMvc()
+                .AddFluentValidation();
 
+            services.AddTransient<IValidator<CreatedUserDto>, CreatedUserDtoValidator>();
         }
 
 
