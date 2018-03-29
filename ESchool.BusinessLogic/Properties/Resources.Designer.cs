@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ESchool.Properties {
+namespace ESchool.BusinessLogic.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ESchool.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ESchool.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ESchool.BusinessLogic.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace ESchool.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Input data is not valid..
+        ///   Ищет локализованную строку, похожую на This email is registreited in system..
         /// </summary>
-        internal static string InValidData {
+        internal static string EmailExistent {
             get {
-                return ResourceManager.GetString("InValidData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Host terminated unexpectedly.
-        /// </summary>
-        internal static string LogFatalError {
-            get {
-                return ResourceManager.GetString("LogFatalError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Starting web host.
-        /// </summary>
-        internal static string SuccessfulHostRun {
-            get {
-                return ResourceManager.GetString("SuccessfulHostRun", resourceCulture);
+                return ResourceManager.GetString("EmailExistent", resourceCulture);
             }
         }
     }
