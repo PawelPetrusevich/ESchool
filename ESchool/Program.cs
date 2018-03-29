@@ -53,7 +53,7 @@ namespace ESchool
                                     .MinimumLevel.Debug()
                                     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                                     .Enrich.FromLogContext()
-                                    .WriteTo.ColoredConsole()
+                                    .WriteTo.LiterateConsole()
                                     .CreateLogger();
                             }
                             else

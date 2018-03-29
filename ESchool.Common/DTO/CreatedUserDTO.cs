@@ -8,6 +8,7 @@ namespace ESchool.Common.DTO
 
         public string Password { get; set; }
 
+        public string Email { get; set; }
 
     }
 }

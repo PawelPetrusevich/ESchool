@@ -3,12 +3,14 @@
     using AutoMapper;
 
     using ESchool.BusinessLogic.Service;
+    using ESchool.Common;
     using ESchool.Common.DTO;
     using ESchool.Common.Interface.Repository;
     using ESchool.Common.Interface.Service;
     using ESchool.Common.ModelVolidators;
     using ESchool.DataAccess.Context;
     using ESchool.DataAccess.Repositories;
+    using ESchool.DIContainer;
 
     using FluentValidation;
     using FluentValidation.AspNetCore;
@@ -36,8 +38,10 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLogging(logginBuilder => logginBuilder.AddSerilog(dispose: true));
-            services.AddAutoMapper();
-            services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ESchoolConnection")));
+            
+            services.DataAccessServiceCollection(this.Configuration);
+            services.BusinessLogicServiceCollection();
+            services.ValidatorServiceCollection();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
