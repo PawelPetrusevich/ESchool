@@ -5,6 +5,6 @@ namespace ESchool.Common.Interface.Service
 {
     public interface IUserService
     {
-        Task<UserDTO> CreateUser(UserDTO user);
+        Task<CreatedUserDto> CreateUser(CreatedUserDto user);
     }
 }

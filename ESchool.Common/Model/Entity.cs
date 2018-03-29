@@ -9,7 +9,7 @@ namespace ESchool.Common.Model
     {
         public int Id { get; set; }
         public int CreatorId { get; set; }
-        public DateTime CreatersDate { get; set; }
+        public DateTime CreatersDate { get; set; } = DateTime.Now;
         public int? ModifierId { get; set; }
         public DateTime? ModifierDate { get; set; }
     }

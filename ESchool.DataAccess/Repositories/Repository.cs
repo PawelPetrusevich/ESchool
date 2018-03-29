@@ -13,14 +13,14 @@ namespace ESchool.DataAccess.Repositories
     public class Repository<TModel> : IRepository<TModel> 
         where TModel : Entity
     {
-        private bool _disposedFlag = false;
-        protected readonly DbContext _context;
-        protected readonly DbSet<TModel> _dbSet;
+        private bool disposedFlag = false;
+        protected readonly DbContext Context;
+        protected readonly DbSet<TModel> DbSet;
 
         public Repository(DbContext context)
         {
-            _context = context;
-            _dbSet = _context.Set<TModel>();
+            this.Context = context;
+            this.DbSet = this.Context.Set<TModel>();
         }
 
         ~Repository()
@@ -35,8 +35,8 @@ namespace ESchool.DataAccess.Repositories
                 throw new ArgumentNullException();
             }
 
-            _dbSet.Add(model);
-            await _context.SaveChangesAsync();
+            this.DbSet.Add(model);
+            await this.Context.SaveChangesAsync();
             return model;
         }
 
@@ -47,15 +47,15 @@ namespace ESchool.DataAccess.Repositories
                 throw new ArgumentException();
             }
 
-            var model = _dbSet.FirstOrDefault(x => x.Id == id);
+            var model = this.DbSet.FirstOrDefault(x => x.Id == id);
 
             if (model==null)
             {
                 throw new ArgumentNullException();
             }
 
-            _dbSet.Remove(model);
-            await _context.SaveChangesAsync();
+            this.DbSet.Remove(model);
+            await this.Context.SaveChangesAsync();
             return model;
         }
 
@@ -66,12 +66,12 @@ namespace ESchool.DataAccess.Repositories
                 throw new ArgumentNullException();
             }
 
-            return await _dbSet.Where(filterExpression).ToListAsync();
+            return await this.DbSet.Where(filterExpression).ToListAsync();
         }
 
         public virtual async Task<IEnumerable<TModel>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await this.DbSet.ToListAsync();
         }
 
         public virtual async Task<TModel> GetAsync(int id)
@@ -81,7 +81,7 @@ namespace ESchool.DataAccess.Repositories
                 throw new ArgumentException();
             }
 
-            return await _dbSet.FindAsync(id);
+            return await this.DbSet.FindAsync(id);
         }
 
         public virtual async Task<TModel> UpdateAsync(TModel model)
@@ -91,8 +91,8 @@ namespace ESchool.DataAccess.Repositories
                 throw new ArgumentNullException();
             }
 
-            _dbSet.Update(model);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            this.DbSet.Update(model);
+            await this.Context.SaveChangesAsync().ConfigureAwait(false);
             return model;
         }
 
@@ -103,7 +103,7 @@ namespace ESchool.DataAccess.Repositories
                 return;
             }
 
-            _disposedFlag = true;
+            this.disposedFlag = true;
 
         }
 

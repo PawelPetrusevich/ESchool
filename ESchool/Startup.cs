@@ -1,13 +1,28 @@
-﻿using ESchool.DataAccess.Context;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-
-namespace ESchool
+﻿namespace ESchool
 {
+    using AutoMapper;
+
+    using ESchool.BusinessLogic.Service;
+    using ESchool.Common.DTO;
+    using ESchool.Common.Interface.Repository;
+    using ESchool.Common.Interface.Service;
+    using ESchool.Common.ModelVolidators;
+    using ESchool.DataAccess.Context;
+    using ESchool.DataAccess.Repositories;
+
+    using FluentValidation;
+    using FluentValidation.AspNetCore;
+
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using Serilog;
+
+    using Swashbuckle.AspNetCore.Swagger;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -20,10 +35,17 @@ namespace ESchool
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var conectionString = Configuration.GetConnectionString("ESchoolConnection");
-            services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(conectionString));
-            services.AddMvc();
+            services.AddLogging(logginBuilder => logginBuilder.AddSerilog(dispose: true));
+            services.AddAutoMapper();
+            services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ESchoolConnection")));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
+            services.AddMvc()
+                .AddFluentValidation();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -31,11 +53,30 @@ namespace ESchool
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
 
-            app.UseMvc();
+            app.UseStaticFiles();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            });
         }
 
-        
+
     }
 }
