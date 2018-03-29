@@ -37,9 +37,6 @@
         {
             services.AddLogging(logginBuilder => logginBuilder.AddSerilog(dispose: true));
             services.AddAutoMapper();
-            services.AddScoped<DbContext, ESchoolContext>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddTransient<IUserService, UserService>();
             services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ESchoolConnection")));
             services.AddSwaggerGen(c =>
             {
@@ -47,8 +44,6 @@
             });
             services.AddMvc()
                 .AddFluentValidation();
-
-            services.AddTransient<IValidator<CreatedUserDto>, CreatedUserDtoValidator>();
         }
 
 
