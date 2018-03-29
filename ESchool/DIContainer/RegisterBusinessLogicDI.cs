@@ -7,6 +7,9 @@
 
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Conteiner for injections in business logic
+    /// </summary>
     public static class RegisterBusinessLogicDI
     {
         public static IServiceCollection BusinessLogicServiceCollection(this IServiceCollection services)

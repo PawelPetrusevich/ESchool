@@ -9,6 +9,10 @@
     <Folder Include="Areas\Home\Data\" />
     <Folder Include="Areas\Home\Models\" />
     <Folder Include="Areas\Home\Views\" />
+    <Folder Include="Areas\Users\Data\" />
+    <Folder Include="Areas\Users\Models\" />
+    <Folder Include="Areas\Users\Views\" />
+    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
     <Folder Include="logs\" />
   </ItemGroup>

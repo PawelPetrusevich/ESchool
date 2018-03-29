@@ -8,7 +8,9 @@ using ESchool.Common.Model.Users;
 
 namespace ESchool.BusinessLogic.Service
 {
-    using Microsoft.Extensions.Logging;
+    using ESchool.BusinessLogic.Properties;
+
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     using Serilog;
 
@@ -33,14 +35,31 @@ namespace ESchool.BusinessLogic.Service
         {
             if (userDto == null)
             {
+                Log.Error("UserDto for create user is empty");
                 throw new ArgumentNullException();
+            }
+
+            if (this.userRepository.GetByEmail(userDto.Email) != null)
+            {
+                Log.Error("This email ==> {Email} <== is registered in the system ", userDto.Email);
+                throw new ArgumentException(Resources.EmailExistent);
             }
             
             var user = this.mapper.Map<AccauntDbModel>(userDto);
+            //user.AccauntSettings = new AccauntSettingsDbModel
+            //{
+            //    AccauntId = user.Id
+            //};
             var result = await this.userRepository.AddAsync(user);
 
-            return result is null ? throw new InvalidOperationException() : this.mapper.Map<CreatedUserDto>(result);
+            if (result == null)
+            {
+                Log.Error("User not created");
+                throw new InvalidOperationException();
+            }
 
+            Log.Information("{User} has be created", result.Loggin);
+            return this.mapper.Map<CreatedUserDto>(result);
         }
     }
 }

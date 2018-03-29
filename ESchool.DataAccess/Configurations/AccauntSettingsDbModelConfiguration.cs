@@ -8,7 +8,7 @@ namespace ESchool.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<AccauntSettingsDbModel> builder)
         {
-            builder.HasKey(x => x.AccauntId);
+            builder.HasKey(x => x.Id);
         }
     }
 }

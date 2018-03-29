@@ -18,7 +18,7 @@ namespace ESchool.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ESchool.Common.Model.Institution.CityDbModel", b =>
@@ -95,6 +95,10 @@ namespace ESchool.DataAccess.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<bool>("IsBanned");
+
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Loggin");
 
                     b.Property<DateTime?>("ModifierDate");
@@ -110,11 +114,18 @@ namespace ESchool.DataAccess.Migrations
 
             modelBuilder.Entity("ESchool.Common.Model.Users.AccauntSettingsDbModel", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("AccauntId");
 
                     b.Property<int?>("Age");
 
                     b.Property<int?>("ClassId");
+
+                    b.Property<DateTime>("CreatersDate");
+
+                    b.Property<int>("CreatorId");
 
                     b.Property<DateTime?>("DateOfBirth");
 
@@ -122,13 +133,20 @@ namespace ESchool.DataAccess.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<DateTime?>("ModifierDate");
+
+                    b.Property<int?>("ModifierId");
+
                     b.Property<string>("Patronymic");
 
                     b.Property<int?>("SchoolId");
 
                     b.Property<int>("Status");
 
-                    b.HasKey("AccauntId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccauntId")
+                        .IsUnique();
 
                     b.ToTable("AccauntSettingsDbModels");
                 });
