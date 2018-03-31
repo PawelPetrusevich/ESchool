@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ModifiUserSettings
+    public class ModifiUserSettingsDTO
     {
         public string FirstName { get; set; }
 

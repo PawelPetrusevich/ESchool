@@ -1,27 +1,30 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
-using ESchool.Common.DTO;
-using ESchool.Common.Interface.Repository;
-using ESchool.Common.Interface.Service;
-using ESchool.Common.Model.Users;
-
-namespace ESchool.BusinessLogic.Service
+﻿namespace ESchool.BusinessLogic.Service
 {
-    using ESchool.BusinessLogic.Properties;
+    using System;
+    using System.Threading.Tasks;
 
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using AutoMapper;
+
+    using ESchool.BusinessLogic.Properties;
+    using ESchool.Common.DTO;
+    using ESchool.Common.Interface.Repository;
+    using ESchool.Common.Interface.Service;
+    using ESchool.Common.Model.Users;
 
     using Serilog;
 
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
+
+        private readonly IUserSettingsRepository userSettingsRepository;
+
         private readonly IMapper mapper;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper, IUserSettingsRepository userSettingsRepository)
         {
             this.mapper = mapper;
+            this.userSettingsRepository = userSettingsRepository;
             this.userRepository = userRepository;
         }
 
@@ -35,7 +38,7 @@ namespace ESchool.BusinessLogic.Service
         {
             if (userDto == null)
             {
-                Log.Error("UserDto for create user is empty");
+                Log.Error(LogResources.EmptyArgument, nameof(userDto));
                 throw new ArgumentNullException();
             }
 
@@ -44,12 +47,8 @@ namespace ESchool.BusinessLogic.Service
                 Log.Error("This email ==> {Email} <== is registered in the system ", userDto.Email);
                 throw new ArgumentException(Resources.EmailExistent);
             }
-            
+
             var user = this.mapper.Map<AccauntDbModel>(userDto);
-            //user.AccauntSettings = new AccauntSettingsDbModel
-            //{
-            //    AccauntId = user.Id
-            //};
             var result = await this.userRepository.AddAsync(user);
 
             if (result == null)
@@ -60,6 +59,35 @@ namespace ESchool.BusinessLogic.Service
 
             Log.Information("{User} has be created", result.Loggin);
             return this.mapper.Map<CreatedUserDto>(result);
+        }
+
+
+        public async Task<ModifiUserSettingsDTO> AddUserSettings(ModifiUserSettingsDTO userSettings, int userId)
+        {
+            if (userSettings == null)
+            {
+                Log.Error(LogResources.EmptyArgument, nameof(userSettings));
+                throw new ArgumentNullException();
+            }
+
+            if (await this.userRepository.GetAsync(userId) == null)
+            {
+                Log.Error(LogResources.IncorectArgument, nameof(userId));
+                throw new ArgumentException();
+            }
+
+            var settings = this.mapper.Map<AccauntSettingsDbModel>(userSettings);
+            settings.AccauntId = userId;
+            var result = await this.userSettingsRepository.AddAsync(settings);
+
+            if (result == null)
+            {
+                Log.Error("User settings not create");
+                throw new InvalidOperationException("User setting not create");
+            }
+
+            Log.Information("User settings is created");
+            return this.mapper.Map<ModifiUserSettingsDTO>(result);
         }
     }
 }

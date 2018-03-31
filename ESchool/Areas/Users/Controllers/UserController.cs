@@ -20,7 +20,7 @@
         {
             this.userService = userService;
         }
-        
+
         [Route("createUser")]
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreatedUserDto user)
@@ -41,9 +41,9 @@
             }
         }
 
-        [Route("AddUserSettings")]
+        [Route("AddUserSettings/{userId}")]
         [HttpPost]
-        public async Task<IActionResult> AddUserSettings([FromBody] ModifiUserSettings userSettings)
+        public async Task<IActionResult> AddUserSettings([FromBody] ModifiUserSettingsDTO userSettings, [FromRoute] int userId)
         {
             if (!this.ModelState.IsValid)
             {
@@ -53,7 +53,7 @@
             try
             {
                 Log.Information($"Attempt modificate the user settings");
-                return this.Ok();
+                return this.Ok(await this.userService.AddUserSettings(userSettings, userId));
             }
             catch (Exception e)
             {
