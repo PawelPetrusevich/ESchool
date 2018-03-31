@@ -8,8 +8,9 @@
     {
         public CreatedUserDtoValidator()
         {
-            this.RuleFor(x => x.Loggin).NotEmpty().MinimumLength(6);
-            this.RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
+            this.RuleFor(x => x.Loggin).NotEmpty().MinimumLength(5);
+            this.RuleFor(x => x.Password).NotEmpty().MinimumLength(5);
+            this.RuleFor(x => x.Email).NotEmpty().EmailAddress();
         }
     }
 }

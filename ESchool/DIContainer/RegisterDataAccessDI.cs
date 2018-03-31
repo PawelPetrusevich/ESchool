@@ -14,6 +14,7 @@
         {
             services.AddScoped<DbContext, ESchoolContext>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserSettingsRepository,UserSettingsRepository>();
             services.AddDbContext<ESchoolContext>(options => options.UseSqlServer(cfg.GetConnectionString("ESchoolConnection")));
             return services;
         }
