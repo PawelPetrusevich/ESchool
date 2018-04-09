@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ESchool.DataAccess.Repositories
 {
-    public class Repository<TModel> : IRepository<TModel> 
+    public class Repository<TModel> : IRepository<TModel>
         where TModel : Entity
     {
         private bool disposedFlag = false;
@@ -42,14 +42,14 @@ namespace ESchool.DataAccess.Repositories
 
         public virtual async Task<TModel> DeleteAsync(int id)
         {
-            if (id<=0)
+            if (id <= 0)
             {
                 throw new ArgumentException();
             }
 
             var model = this.DbSet.FirstOrDefault(x => x.Id == id);
 
-            if (model==null)
+            if (model == null)
             {
                 throw new ArgumentNullException();
             }
@@ -76,7 +76,7 @@ namespace ESchool.DataAccess.Repositories
 
         public virtual async Task<TModel> GetAsync(int id)
         {
-            if (id<=0)
+            if (id <= 0)
             {
                 throw new ArgumentException();
             }
@@ -86,7 +86,7 @@ namespace ESchool.DataAccess.Repositories
 
         public virtual async Task<TModel> UpdateAsync(TModel model)
         {
-            if (model==null)
+            if (model == null)
             {
                 throw new ArgumentNullException();
             }

@@ -9,9 +9,9 @@ namespace ESchool.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<AccauntDbModel> builder)
         {
             builder.HasKey(x => x.Id);
-            builder
-                .HasOne(x => x.AccauntSettings)
+            builder.HasOne(x => x.AccauntSettings)
                 .WithOne(x => x.Accaunt)
+                .HasForeignKey<AccauntSettingsDbModel>(x => x.Id)
                 .IsRequired();
         }
     }

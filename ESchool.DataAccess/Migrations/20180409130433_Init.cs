@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ESchool.DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,8 @@ namespace ESchool.DataAccess.Migrations
                     CreatersDate = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: true),
+                    IsBanned = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     Loggin = table.Column<string>(nullable: true),
                     ModifierDate = table.Column<DateTime>(nullable: true),
                     ModifierId = table.Column<int>(nullable: true),
@@ -66,22 +68,27 @@ namespace ESchool.DataAccess.Migrations
                 name: "AccauntSettingsDbModels",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false),
                     AccauntId = table.Column<int>(nullable: false),
                     Age = table.Column<int>(nullable: true),
                     ClassId = table.Column<int>(nullable: true),
+                    CreatersDate = table.Column<DateTime>(nullable: false),
+                    CreatorId = table.Column<int>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
+                    ModifierDate = table.Column<DateTime>(nullable: true),
+                    ModifierId = table.Column<int>(nullable: true),
                     Patronymic = table.Column<string>(nullable: true),
                     SchoolId = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccauntSettingsDbModels", x => x.AccauntId);
+                    table.PrimaryKey("PK_AccauntSettingsDbModels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccauntSettingsDbModels_AccauntDbModels_AccauntId",
-                        column: x => x.AccauntId,
+                        name: "FK_AccauntSettingsDbModels_AccauntDbModels_Id",
+                        column: x => x.Id,
                         principalTable: "AccauntDbModels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);

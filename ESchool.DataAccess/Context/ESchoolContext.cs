@@ -1,11 +1,12 @@
-﻿using ESchool.Common.Model.Institution;
-using ESchool.Common.Model.SubjectOfInstuctions;
-using ESchool.Common.Model.Users;
-using ESchool.DataAccess.Configurations;
-using Microsoft.EntityFrameworkCore;
-
-namespace ESchool.DataAccess.Context
+﻿namespace ESchool.DataAccess.Context
 {
+    using ESchool.Common.Model.Institution;
+    using ESchool.Common.Model.SubjectOfInstuctions;
+    using ESchool.Common.Model.Users;
+    using ESchool.DataAccess.Configurations;
+
+    using Microsoft.EntityFrameworkCore;
+
     public class ESchoolContext : DbContext
     {
         public ESchoolContext(DbContextOptions<ESchoolContext> options) : base(options)
@@ -13,10 +14,13 @@ namespace ESchool.DataAccess.Context
         }
 
         public DbSet<AccauntDbModel> AccauntDbModels { get; set; }
+
         public DbSet<AccauntSettingsDbModel> AccauntSettingsDbModels { get; set; }
 
         public DbSet<SubjectOfInstructionsDbModel> SubjectOfInstructionsDbModels { get; set; }
+
         public DbSet<InstitutionDbModel> InstutionDbModels { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

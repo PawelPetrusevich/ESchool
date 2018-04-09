@@ -117,15 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InValidData" xml:space="preserve">
-    <value>Input data is not valid.</value>
-  </data>
-  <data name="LogFatalError" xml:space="preserve">
-    <value>Host terminated unexpectedly</value>
-    <comment>Serilog fatal error whith host run.</comment>
-  </data>
-  <data name="SuccessfulHostRun" xml:space="preserve">
-    <value>Starting web host</value>
-    <comment>Successful starting host.</comment>
+  <data name="EmailExistent" xml:space="preserve">
+    <value>This email is registreited in system.</value>
   </data>
 </root>

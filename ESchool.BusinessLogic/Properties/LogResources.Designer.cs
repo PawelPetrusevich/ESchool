@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ESchool.Properties {
+namespace ESchool.BusinessLogic.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace ESchool.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class LogResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal LogResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ESchool.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ESchool.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ESchool.BusinessLogic.Properties.LogResources", typeof(LogResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,20 @@ namespace ESchool.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Input data is not valid..
+        ///   Ищет локализованную строку, похожую на {Argument} is empty..
         /// </summary>
-        internal static string InValidData {
+        internal static string EmptyArgument {
             get {
-                return ResourceManager.GetString("InValidData", resourceCulture);
+                return ResourceManager.GetString("EmptyArgument", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Host terminated unexpectedly.
+        ///   Ищет локализованную строку, похожую на {Argument} is incorect..
         /// </summary>
-        internal static string LogFatalError {
+        internal static string IncorectArgument {
             get {
-                return ResourceManager.GetString("LogFatalError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Starting web host.
-        /// </summary>
-        internal static string SuccessfulHostRun {
-            get {
-                return ResourceManager.GetString("SuccessfulHostRun", resourceCulture);
+                return ResourceManager.GetString("IncorectArgument", resourceCulture);
             }
         }
     }

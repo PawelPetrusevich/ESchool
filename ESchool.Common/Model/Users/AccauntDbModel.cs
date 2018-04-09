@@ -8,6 +8,11 @@
 
         public string Email { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
+        public bool IsBanned { get; set; } = false;
+
         public AccauntSettingsDbModel AccauntSettings { get; set; }
+        
     }
 }

@@ -5,10 +5,8 @@ using ESchool.Common.Enums;
 
 namespace ESchool.Common.Model.Users
 {
-    public class AccauntSettingsDbModel
+    public class AccauntSettingsDbModel : Entity
     {
-        public int AccauntId { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -24,7 +22,6 @@ namespace ESchool.Common.Model.Users
         public int? ClassId { get; set; }
 
         public Status Status { get; set; }
-        
 
         public AccauntDbModel Accaunt { get; set; }
     }
