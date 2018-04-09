@@ -7,8 +7,6 @@ namespace ESchool.Common.Model.Users
 {
     public class AccauntSettingsDbModel : Entity
     {
-        public int AccauntId { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

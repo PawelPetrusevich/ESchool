@@ -114,8 +114,7 @@ namespace ESchool.DataAccess.Migrations
 
             modelBuilder.Entity("ESchool.Common.Model.Users.AccauntSettingsDbModel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<int>("AccauntId");
 
@@ -145,9 +144,6 @@ namespace ESchool.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccauntId")
-                        .IsUnique();
-
                     b.ToTable("AccauntSettingsDbModels");
                 });
 
@@ -163,7 +159,7 @@ namespace ESchool.DataAccess.Migrations
                 {
                     b.HasOne("ESchool.Common.Model.Users.AccauntDbModel", "Accaunt")
                         .WithOne("AccauntSettings")
-                        .HasForeignKey("ESchool.Common.Model.Users.AccauntSettingsDbModel", "AccauntId")
+                        .HasForeignKey("ESchool.Common.Model.Users.AccauntSettingsDbModel", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

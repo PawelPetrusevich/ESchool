@@ -15,11 +15,11 @@ namespace ESchool.Common
 
             this.CreateMap<AccauntDbModel, UserBannedDTO>()
                 .ForMember(item => item.IsBanned, x => x.MapFrom(y => y.IsBanned))
-                .ForMember(item => item.UserName, x => x.MapFrom(y => y.AccauntSettings.FirstName))
+                .ForMember(item => item.UserName, x => x.MapFrom(y => y.Loggin))
                 .ReverseMap();
 
             this.CreateMap<AccauntDbModel, UserDeletedDTO>()
-                .ForMember(item => item.UserName, x => x.MapFrom(y => y.AccauntSettings.FirstName))
+                .ForMember(item => item.UserName, x => x.MapFrom(y => y.Loggin))
                 .ReverseMap();
         }
     }

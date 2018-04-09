@@ -11,7 +11,7 @@ namespace ESchool.DataAccess.Configurations
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.AccauntSettings)
                 .WithOne(x => x.Accaunt)
-                .HasForeignKey<AccauntSettingsDbModel>(x => x.AccauntId)
+                .HasForeignKey<AccauntSettingsDbModel>(x => x.Id)
                 .IsRequired();
         }
     }
