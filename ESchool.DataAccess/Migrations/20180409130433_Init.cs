@@ -68,8 +68,7 @@ namespace ESchool.DataAccess.Migrations
                 name: "AccauntSettingsDbModels",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     AccauntId = table.Column<int>(nullable: false),
                     Age = table.Column<int>(nullable: true),
                     ClassId = table.Column<int>(nullable: true),
@@ -88,8 +87,8 @@ namespace ESchool.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_AccauntSettingsDbModels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccauntSettingsDbModels_AccauntDbModels_AccauntId",
-                        column: x => x.AccauntId,
+                        name: "FK_AccauntSettingsDbModels_AccauntDbModels_Id",
+                        column: x => x.Id,
                         principalTable: "AccauntDbModels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -118,12 +117,6 @@ namespace ESchool.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccauntSettingsDbModels_AccauntId",
-                table: "AccauntSettingsDbModels",
-                column: "AccauntId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -17,6 +17,7 @@
 
             services.AddAutoMapper();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAdminService, AdminService>();
             return services;
         }
     }

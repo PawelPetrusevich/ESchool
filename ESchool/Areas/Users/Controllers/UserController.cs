@@ -41,9 +41,9 @@
             }
         }
 
-        [Route("AddUserSettings/{userId}")]
+        [Route("AddUserSettings")]
         [HttpPost]
-        public async Task<IActionResult> AddUserSettings([FromBody] ModifiUserSettingsDTO userSettings, [FromRoute] int userId)
+        public async Task<IActionResult> AddUserSettings([FromBody] ModifiUserSettingsDTO userSettings)
         {
             if (!this.ModelState.IsValid)
             {
@@ -53,6 +53,7 @@
             try
             {
                 Log.Information($"Attempt modificate the user settings");
+                var userId = 2; // modifeir id
                 return this.Ok(await this.userService.AddUserSettings(userSettings, userId));
             }
             catch (Exception e)

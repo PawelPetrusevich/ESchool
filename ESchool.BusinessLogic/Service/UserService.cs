@@ -49,6 +49,7 @@
             }
 
             var user = this.mapper.Map<AccauntDbModel>(userDto);
+            user.AccauntSettings = new AccauntSettingsDbModel();
             var result = await this.userRepository.AddAsync(user);
 
             if (result == null)
@@ -70,15 +71,27 @@
                 throw new ArgumentNullException();
             }
 
-            if (await this.userRepository.GetAsync(userId) == null)
+            if (userId <= 0)
+            {
+                throw new ArgumentException();
+            }
+
+            var user = await this.userSettingsRepository.GetAsync(userSettings.Id);
+
+            if (user == null)
             {
                 Log.Error(LogResources.IncorectArgument, nameof(userId));
                 throw new ArgumentException();
             }
 
-            var settings = this.mapper.Map<AccauntSettingsDbModel>(userSettings);
-            settings.AccauntId = userId;
-            var result = await this.userSettingsRepository.AddAsync(settings);
+            user.FirstName = userSettings.FirstName;
+            user.LastName = userSettings.LastName;
+            user.Patronymic = userSettings.Patronymic;
+            user.DateOfBirth = userSettings.DateOfBirth;
+            user.ModifierDate = DateTime.Now;
+            user.ModifierId = userId;
+
+            var result = await this.userSettingsRepository.UpdateAsync(user);
 
             if (result == null)
             {
@@ -86,7 +99,7 @@
                 throw new InvalidOperationException("User setting not create");
             }
 
-            Log.Information("User settings is created");
+            Log.Debug("User settings is created");
             return this.mapper.Map<ModifiUserSettingsDTO>(result);
         }
     }
