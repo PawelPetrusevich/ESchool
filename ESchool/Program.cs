@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace ESchool
+﻿namespace ESchool
 {
     using System;
     using System.IO;
-
-    using ESchool.Properties;
-
+    using Microsoft.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyModel;
-
+    using Properties;
     using Serilog;
     using Serilog.Events;
 

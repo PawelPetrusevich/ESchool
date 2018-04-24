@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company=" " file=" UserDeletedDTO.cs">
-//    
+// <copyright file="UserDeletedDTO.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // <summary>
-//  Creator name: 
+//  Creator name:
 //  Solution: ESchool
 //  Project: ESchool.Common
 //  Filename: UserDeletedDTO.cs
 //  Created day: 08.04.2018    22:37
-//  </summary> 
+//  </summary>
 //  --------------------------------------------------------------------------------------------------------------------
 
 namespace ESchool.Common.DTO
