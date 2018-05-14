@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ESchool.Areas.Administrator.Controllers
+﻿namespace ESchool.Areas.Administrator.Controllers
 {
-    using ESchool.Common.DTO;
+    using System;
+    using System.Threading.Tasks;
     using ESchool.Common.Interface.Service;
+    using Microsoft.AspNetCore.Mvc;
 
-    
     [Route("api/[controller]")]
     public class AdminController : Controller
     {
