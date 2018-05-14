@@ -1,6 +1,7 @@
 ﻿namespace ESchool
 {
     using DIContainer;
+
     using FluentValidation.AspNetCore;
 
     using Microsoft.AspNetCore.Builder;
@@ -24,16 +25,33 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvcCore()
+                .AddJsonFormatters()
+                .AddApiExplorer()
+                .AddAuthorization()
+                .AddFluentValidation();
+
             services.AddLogging(logginBuilder => logginBuilder.AddSerilog(dispose: true));
+
+            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(
+                option =>
+                    {
+                        option.Authority = "http://localhost:5000";
+                        option.RequireHttpsMetadata = false;
+                        option.ApiName = "api";
+                    });
+
             services.DataAccessServiceCollection(this.Configuration);
+
             services.BusinessLogicServiceCollection();
+
             services.ValidatorServiceCollection();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
-            services.AddMvc()
-                .AddFluentValidation();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +62,8 @@
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
+
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 
